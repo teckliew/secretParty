@@ -24,6 +24,11 @@ body {
   // background-repeat: no-repeat;
 }
 nav {
+  background: -webkit-linear-gradient(left top, $teal , teal); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, $teal, teal); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, $teal, teal); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, $teal , teal); /* Standard syntax */
+  background-repeat: no-repeat;
   padding: auto 20px;
   color: black;
   background-color: $cream;
@@ -31,12 +36,6 @@ nav {
     -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
     -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
-  }
-  ul li a {
-    color: $tan;
-  }
-  a {
-    color: $tan;
   }
 }
 
@@ -63,7 +62,7 @@ nav {
 
 .navbutton {
   #menubutton {
-    margin: 20px;
+    margin: 15px 20px;
     font-size: 40px;
   }
 }

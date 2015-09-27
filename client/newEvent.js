@@ -1,0 +1,37 @@
+Template.newEvent.events({
+    'submit form': function(event){
+      event.preventDefault();
+      var eventName = $('[id=eventName]').val();
+      var eventImage = $('[id=eventImage]').val();
+      var eventDate = $('[id=eventDate]').val();
+      var eventTime = $('[id=eventTime]').val();
+      var eventLocation = $('[id=eventLocation]').val();
+      var eventDetails = $('[id=eventDetails]').val();
+      var email = $('[id=email]').val();
+      var secretChatcheck = $('[id=secretChatcheck]').val();
+      var secretHotlinecheck = $('[id=secretHotlinecheck]').val();
+      var rsvpCheck = $('[id=rsvpCheck]').val();
+      Events.insert({
+          name: eventName,
+          image: eventImage,
+          date: eventDate,
+          time: eventTime,
+          location: eventLocation,
+          details: eventDetails,
+          email: email,
+          chat: secretChatcheck,
+          hotline: secretHotlinecheck,
+          showrsvp: rsvpCheck
+      });
+      $('[id=eventName]').val('');
+      $('[id=eventImage]').val('');
+      $('[id=eventDate]').val('');
+      $('[id=eventTime]').val('');
+      $('[id=eventLocation]').val('');
+      $('[id=eventDetails]').val('');
+      $('[id=email]').val('');
+      $('[id=secretChatcheck]').val('');
+      $('[id=secretHotlinecheck]').val('');
+      $('[id=rsvpCheck]').val('');
+    }
+});
