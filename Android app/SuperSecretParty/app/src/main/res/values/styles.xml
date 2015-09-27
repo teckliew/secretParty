@@ -1,0 +1,21 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="actionBarStyle" > @style/actionbar </item>
+        <item name="android:colorPrimary">@color/mainbar</item>
+        <item name="android:colorPrimaryDark">@color/mainbar</item>
+        <item name="android:colorAccent">#00FFFF</item>
+    </style>
+
+    <style name="actionbar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#0000FF</item>
+        <item name="background">@color/actionbackground</item>
+        <item name="android:backgroundStacked">#0000FF</item>
+        <item name="android:backgroundSplit">#0000FF</item>
+    </style>
+
+    <color name="actionbackground">#7433DF</color>
+    <color name="mainbar">#2E3192</color>
+</resources>
