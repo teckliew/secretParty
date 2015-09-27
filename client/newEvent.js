@@ -6,11 +6,14 @@ Template.newEvent.events({
       var eventDate = $('[id=eventDate]').val();
       var eventTime = $('[id=eventTime]').val();
       var eventLocation = $('[id=eventLocation]').val();
-      var eventDetails = $('[id=eventDetails]').val();
       var email = $('[id=email]').val();
       var secretChatcheck = $('[id=secretChatcheck]').val();
       var secretHotlinecheck = $('[id=secretHotlinecheck]').val();
       var rsvpCheck = $('[id=rsvpCheck]').val();
+      var phonenum = $('[id=phonenum]').val();
+      var flownum = $('[id=flownum]').val();
+      var eventDetails = $('[id=eventDetails]').val();
+
       var post = {
           name: eventName,
           image: eventImage,
@@ -21,7 +24,9 @@ Template.newEvent.events({
           email: email,
           chat: secretChatcheck,
           hotline: secretHotlinecheck,
-          showrsvp: rsvpCheck
+          showrsvp: rsvpCheck,
+          phone: phonenum,
+          flow: flownum
       };
 
       post._id = Events.insert(post);
@@ -37,6 +42,7 @@ Template.newEvent.events({
       $('[id=secretChatcheck]').val('');
       $('[id=secretHotlinecheck]').val('');
       $('[id=rsvpCheck]').val('');
-      //Router.go('/articles/example');
+      $('[id=phonenum]').val('');
+      $('[id=flownum]').val('');
     }
 });
