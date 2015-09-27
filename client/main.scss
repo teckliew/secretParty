@@ -1,0 +1,31 @@
+//secret party colors
+$fluffy: #DEEEF8;
+$teal: #55C3DB;
+$blue: #229FF3;
+$purple: #2E3192;
+$lightpurple: #4e337e;
+$violet: #7433DF;
+$red: #E56E66;
+$salmon: #dd879f;
+$cream: #F4ECDC;
+$skin: #EDBFA8;
+$tan: #8C8DA1;
+$coal: #333B42;
+
+html {
+  height: 100%;
+}
+body {
+  background-color: $cream;
+}
+
+#logo{
+  height: 50px;
+  width: auto;
+  background: url('secretPartyLogo.png') no-repeat;
+  background-size: 50px;
+}
+
+.mainPanel {
+  background-color: white;
+}
