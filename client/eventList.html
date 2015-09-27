@@ -1,0 +1,26 @@
+<template name="eventList">
+  <div class="container">
+    <div class="row">
+      <div class="mainPanel z-depth-3 col s12">
+        <table class="highlight">
+          <thead>
+            <tr>
+                <th data-field="eventName">Event Name</th>
+                <th data-field="name">Date & Time</th>
+                <th data-field="price">Item Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each list}}
+              <tr>
+                <td><a href="/events/{{_id}}">{{name}}</a></td>
+                <td>{{date}} {{time}}</td>
+                <td>{{location}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</template>
