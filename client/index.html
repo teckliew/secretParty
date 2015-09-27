@@ -4,7 +4,10 @@
     <link rel="icon" sizes="16x16" href="/favicon.ico?v=2">
 </head>
 <template name="home">
-  {{> navbar}}
+  {{#if thisurl}}
+  {{else}}
+    {{> navbar}}
+  {{/if}}
   <div class="main section">
     {{> yield}}
   </div>

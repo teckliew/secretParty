@@ -39,6 +39,15 @@ nav {
   }
 }
 
+.hidden {
+  display: none;
+}
+
+.landingPage {
+  background-color: $coal;
+}
+
+
 .page-footer {
   background: -webkit-linear-gradient(left top, $purple , $lightpurple); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(bottom right, $purple, $lightpurple); /* For Opera 11.1 to 12.0 */
@@ -71,10 +80,17 @@ nav {
   color: white;
 }
 
+#wordmark {
+  font-variant: small-caps;
+}
 
-.landing{
-  overflow: auto;
-  margin: auto;
-  position: relative;
+.coverPage {
+  position: absolute;
+  left: 50%;
   top: 50%;
+  ms-transform: translate(-50%, -50%); /* IE 9 */
+    -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
 }
