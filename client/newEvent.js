@@ -11,7 +11,7 @@ Template.newEvent.events({
       var secretChatcheck = $('[id=secretChatcheck]').val();
       var secretHotlinecheck = $('[id=secretHotlinecheck]').val();
       var rsvpCheck = $('[id=rsvpCheck]').val();
-      Events.insert({
+      var post = {
           name: eventName,
           image: eventImage,
           date: eventDate,
@@ -22,7 +22,11 @@ Template.newEvent.events({
           chat: secretChatcheck,
           hotline: secretHotlinecheck,
           showrsvp: rsvpCheck
-      });
+      };
+
+      post._id = Events.insert(post);
+      Router.go('events.show', post);
+
       $('[id=eventName]').val('');
       $('[id=eventImage]').val('');
       $('[id=eventDate]').val('');
@@ -33,5 +37,6 @@ Template.newEvent.events({
       $('[id=secretChatcheck]').val('');
       $('[id=secretHotlinecheck]').val('');
       $('[id=rsvpCheck]').val('');
+      //Router.go('/articles/example');
     }
 });
