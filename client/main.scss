@@ -48,6 +48,7 @@ nav {
   background-repeat: no-repeat;
 }
 
+
 #logo{
   margin: 12px 10px;
   height: 25px;
@@ -69,4 +70,12 @@ nav {
 
 .card .card-action a {
   color: white;
+}
+
+
+.landing{
+  overflow: auto;
+  margin: auto;
+  position: relative;
+  top: 50%;
 }

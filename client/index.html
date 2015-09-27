@@ -1,24 +1,14 @@
-<head>
-  <title>Secret Party</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body>
+<template name="home">
   {{> navbar}}
-
-  <div class="section">
-    {{> eventPage}}
+  <div class="main section">
+    {{> yield}}
   </div>
-  <div class="section">
-    {{> newEvent}}
-  </div>
-  <footer class="page-footer">
+  <!-- <footer class="page-footer">
     <div class="footer-copyright">
       <div class="container">
       © 2015 Secret Party
       <a class="grey-text text-lighten-4 left" id="logo" href="#!"></a>
       </div>
     </div>
-  </footer>
-</body>
+  </footer> -->
+</template>
