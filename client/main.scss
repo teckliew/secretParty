@@ -27,11 +27,6 @@ nav {
   padding: auto 20px;
   color: black;
   background-color: $cream;
-  // background: -webkit-linear-gradient(left top, $purple , $lightpurple); /* For Safari 5.1 to 6.0 */
-  // background: -o-linear-gradient(bottom right, $purple, $lightpurple); /* For Opera 11.1 to 12.0 */
-  // background: -moz-linear-gradient(bottom right, $purple, $lightpurple); /* For Firefox 3.6 to 15 */
-  // background: linear-gradient(to bottom right, $purple , $lightpurple); /* Standard syntax */
-  // background-repeat: no-repeat;
   .nav-wrapper{
     -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
     -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
@@ -45,21 +40,29 @@ nav {
   }
 }
 
-.z-depth-0 {
-
+.page-footer {
+  background: -webkit-linear-gradient(left top, $purple , $lightpurple); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, $purple, $lightpurple); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, $purple, $lightpurple); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, $purple , $lightpurple); /* Standard syntax */
+  background-repeat: no-repeat;
 }
 
 #logo{
-  height: 50px;
-  width: 50px;
+  margin: 12px 10px;
+  height: 25px;
+  width: 25px;
   background: url('secretPartyLogo.png') no-repeat;
-  background-size: 50px;
+  background-size: 25px;
 }
 
 .mainPanel {
   background-color: white;
 }
 
-.button-collapse {
-  margin-left: 20px;
+.navbutton {
+  #menubutton {
+    margin: 20px;
+    font-size: 40px;
+  }
 }

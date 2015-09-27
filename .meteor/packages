@@ -16,3 +16,4 @@ insecure
 fourseven:scss
 materialize:materialize@=0.97.0
 planettraining:material-design-icons-font
+iron:router
