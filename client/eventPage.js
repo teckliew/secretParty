@@ -4,13 +4,13 @@ Template.eventPage.events({
     if (phone==null){
         phone=0;
     };
-    Events.update(this._id, {$set:{"phonenum": phone}});
+    Events.update(this._id, {$set:{"phone": phone}});
   },
   'keyup #eventflownum': function (evt) {
     var flow = $(evt.target).val();
     if (flow==null){
         flow=0;
     };
-    Events.update(this._id, {$set:{"flownum": flow}});
+    Events.update(this._id, {$set:{"flow": flow}});
   }
 });

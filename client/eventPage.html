@@ -13,7 +13,7 @@
                     <p>Location: {{location}}</p>
                     <br>
                     <div class="card-action">
-                      <a href="tel://1-201-654-0313" class="waves-effect waves-light blue btn"><i class="material-icons left">phone</i>Call</a>
+                      <a href="tel://{{flow}}" class="waves-effect waves-light blue btn"><i class="material-icons left">phone</i>Call</a>
 
                     </div>
                   </div>
@@ -25,19 +25,18 @@
                     <p>{{details}}</p>
                     <div class="row">
                       <div class="input-field col s12">
-                        <i class="zmdi zmdi-phone"></i>
                         <input id="eventphonenum" type="text" class="validate">
-                        <label for="eventphonenum">{{phonenum}}</label>
+                        <label for="eventphonenum">{{phone}}</label>
                       </div>
                     </div>
                     <div class="row">
                       <div class="input-field col s12">
                         <input id="eventflownum" type="text" class="validate">
-                        <label for="eventflownum">{{flownum}}</label>
+                        <label for="eventflownum">{{flow}}</label>
                       </div>
                     </div>
                     <br>
-                      <a href="tel://1-201-654-0313" class="waves-effect waves-light blue btn"><i class="material-icons left">phone</i>Call</a>
+                      <a href="tel://{{flow}}" class="waves-effect waves-light blue btn"><i class="material-icons left">phone</i>Call</a>
                       <a href="#" class="waves-effect waves-light btn"><i class="material-icons left">done</i>RSVP</a>
                   </div>
                 </div>

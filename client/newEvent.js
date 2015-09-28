@@ -2,7 +2,7 @@ Template.newEvent.events({
     'submit form': function(event){
       event.preventDefault();
       var eventName = $('[id=eventName]').val();
-      var eventImage = $('[id=eventImage]').val();
+      //var eventImage = $('[id=eventImage]').val();
       var eventDate = $('[id=eventDate]').val();
       var eventTime = $('[id=eventTime]').val();
       var eventLocation = $('[id=eventLocation]').val();
@@ -16,7 +16,7 @@ Template.newEvent.events({
 
       var post = {
           name: eventName,
-          image: eventImage,
+          //image: eventImage,
           date: eventDate,
           time: eventTime,
           location: eventLocation,
@@ -33,7 +33,7 @@ Template.newEvent.events({
       Router.go('events.show', post);
 
       $('[id=eventName]').val('');
-      $('[id=eventImage]').val('');
+      //$('[id=eventImage]').val('');
       $('[id=eventDate]').val('');
       $('[id=eventTime]').val('');
       $('[id=eventLocation]').val('');
