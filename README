@@ -1,4 +1,4 @@
-//LINK API for creating water marked images.
+//LINK API functions for creating water marked images.
 
 create a trigger with a name createTrigger(name)
 create a payoff with a name and url createPayoff(name, url)
@@ -7,7 +7,4 @@ create link with a link name  createLink()
 upload a jpeg using submit
 
 get the uploaded file getUploadedFile()
-
 which will be used to create an event.
-
-
