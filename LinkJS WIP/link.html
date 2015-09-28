@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+	<script src="FileSaver.js"></script>
+
+</head>
+<body>
+
+	<img id="photo"/>
+
+	<form id="data" method="post" enctype="multipart/form-data">
+		Select image to upload:
+		<input id="test-input" type="file" />
+		<button>Submit</button>
+	</form>
+
+</body>
+
+	<script> 
+		
+		var accessToken; 
+		var payOffId;
+		var triggerId;
+		var uploadUrlLink;
+		var watermarkUrl;
+		
+
+		//sets end date to 24 hours from current date.
+		var endDate = function (){
+			var currentDate = new Date();
+			currentDate.setHours(currentDate.getHours() + 24)
+			return currentDate;
+		}
+			
+	var createAccessToken = function () {
+		var getTokenUrl = 'https://www.livepaperapi.com/auth/v1/token';
+		var auth_token = 'em1lc3IyMnhzbTFuNWFlZXF1cWszMnczMGRjenVmb3k6bVVTV2p5UnE3VmhGMHZmU3Y5bXdCc0RlaXJINWVoNDY=';
+		
+
+		$.ajax({
+			type: 'Post',
+			url: getTokenUrl,
+			contentType: 'application/x-www-form-urlencoded',
+			headers: {
+				'Authorization': 'basic ' + auth_token
+			},
+			data: 'grant_type=client_credentials&scope=default',
+			grant_type: 'REQUIRED',
+			success: function (response){
+				accessToken = response.accessToken
+				console.log("access token created succesfully!")
+			},
+			error: function (error){
+				console.log("token creation failure: " + error.responseText)
+			}
+		});	
+	}	
+
+	var createTrigger = function (name) { 		
+		var createTriggerUrl = 'https://www.livepaperapi.com/api/v1/triggers'
+		
+		$.ajax({
+			type: 'Post',
+			url: createTriggerUrl,
+			contentType: 'application/json',
+			accept: 'application/json',
+			headers: {
+				'Authorization': 'Bearer ' + accessToken
+			},
+			data: JSON.stringify({
+				"trigger":{
+					"name": name,
+					"type":'watermark',
+					"endDate": endDate
+				}
+			}),
+
+			success: function (response){
+				console.log("trigger created")
+				// console.log(response.trigger.id)
+				triggerId = response.trigger.id
+				watermarkUrl = response.trigger.link[0].href
+			},
+			error: function (error){
+				console.log("trigger creation failure: " + error.responseText)
+				console.log(error)
+			}
+		})		
+	}
+
+	var getTrigger = function (){
+		var getTriggerUrl = 'https://www.livepaperapi.com/api/v1/triggers/<trigger-id>'
+		$.ajax({
+			type: 'Get',
+			headers: {
+				Authorization: 'Bearer ' + accessToken
+			},
+			accept: 'application/json',
+			success: function (response){
+				console.log("got trigger")
+				console.log(response)
+			},
+			error: function (error){
+				console.log("didn't get trigger " + error.responseText)
+				console.log(error)
+			}
+		})
+	}
+
+	var createPayoff = function (name, url){
+		var createPayoffUrl = 'https://www.livepaperapi.com/api/v1/payoffs'
+		payOffId = undefined;
+
+		$.ajax({
+			type: 'Post',
+			url: createPayoffUrl,
+			headers: {
+				'Authorization': 'Bearer ' + accessToken
+			},
+			contentType: 'application/json',
+			accept: 'application/json',
+			data: JSON.stringify({
+				"payoff": {
+					"name": name,
+					"URL": url
+				}
+			}),
+			success: function (response){
+				console.log("payoff created")
+				console.log(response)
+				payOffId = response.payoff.id
+			},
+			error: function (error){
+				console.log("payoff failed" + error.responseText)
+				console.log(error)
+			}
+
+
+		});
+	}
+	var deletePayoff = function (id){
+		var deletePayoffUrl = 'https://www.livepaperapi.com/api/v1/payoffs/'+id
+
+		$.ajax({
+			type: 'Delete',
+			url: deletePayoffUrl,
+			headers: {
+				'Authorization': 'Bearer ' + accessToken
+			},
+			success: function (response){
+				console.log("payoff deleted")
+				console.log(response)
+			},
+			error: function (error){
+				console.log("payoff deletion failed" + error.responseText)
+				console.log(error)
+			}
+		})
+	}
+
+	var createLink = function (linkName){
+		var createLinkUrl = 'https://www.livepaperapi.com/api/v1/links'
+
+		$.ajax({
+			type: 'Post',
+			url: createLinkUrl,
+			contentType: 'application/json',
+			accept: 'application/json',
+			headers: {
+				'Authorization': 'Bearer ' + accessToken
+			},
+			data: JSON.stringify({
+				"link": {
+					"name": linkName,
+					"payoffId": payOffId,
+					"triggerId": triggerId
+				}
+			}),
+			success: function (response){
+				console.log("linkcreated")
+				console.log(response)
+				console.log(response.link.id)
+			},
+			error: function (error){
+				console.log("create link failure" + error.responseText)
+				console.log(error)
+			}
+		})
+	}
+
+	//Post request - upload img to be watermarked.
+	$('#data').on('submit',(function (e) { 
+		
+		e.preventDefault() 
+
+		var uploadUrl = 'https://storage.livepaperapi.com/objects/v1/files'
+
+		var file = document.getElementById('test-input').files[0],
+		xhr = new XMLHttpRequest();
+	
+		xhr.open('POST', uploadUrl);
+		
+		xhr.onload = function (){
+			if (xhr.status === 201){
+				console.log("YOU DID IT")
+				console.log(xhr.status)
+				uploadUrlLink = (xhr.getResponseHeader('Location'));
+				console.log(uploadUrlLink)
+			} else {
+				console.log('Request failed. Returned status of '+ xhr.status)
+				console.log(xhr.responseText)
+			}
+		};
+
+		xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken );
+		xhr.setRequestHeader('Content-Type', 'image/jpeg') 
+		xhr.send(file);
+	}));
+	
+	var result; 
+	var getUploadedFile = function (){
+		
+		var xhr = new XMLHttpRequest();
+		
+		xhr.open('GET',watermarkUrl+'?imageUrl='+uploadUrlLink+'&resolution=75&strength=10')
+			
+		xhr.onload = function (){
+			
+			if (xhr.status === 200){
+			
+			result = new Blob([xhr.responseText], {type:"image/jpeg"});
+    	var urlCreator = window.URL || window.webkitURL;
+    	var imageUrl = urlCreator.createObjectURL( result );
+    	var img = document.querySelector( "#photo" );
+    	img.src = imageUrl;
+			
+			} else { 
+				console.log('Download failed '+ xhr.status)
+				console.log(xhr.responseText)
+			}
+		}
+		xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+		xhr.setRequestHeader('Accept', 'image/jpeg');
+		xhr.send();
+
+		// $.ajax({
+		// 	type: 'Get',
+		// 	url: watermarkUrl+'?imageUrl='+uploadUrlLink+'&resolution=75&strength=10',
+		// 	headers: {
+		// 		'Authorization': 'Bearer ' + accessToken
+		// 	},
+		// 	accept: 'image/jpg',
+		// 	mimeType: "image/jpg",
+		// 	success: function (response){
+		// 		// console.log(response)
+		// 		// img = new Image;
+		// 		// img.src = response
+		// 		// $('#photo').attr('src',img.src);
+		// 		 var reader = new FileReader()
+		// 		 reader.onload = function (response) {
+		// 		     document.getElementById("photo").src = response.target.result;
+		// 		  }
+		// 		 reader.readAsDataURL(new Blob([response]));
+		// 	},
+		// 	error: function (error){
+		// 		console.log("failed to get file" + error.responseText)
+		// 		console.log(error)
+		// 	}
+		// }).done(function(response){
+		// 	console.log(typeof response);
+		// 	var src = 'data:image/jpeg;base64, '+response.toString('base64');
+		// 	$('#photo').attr('img',src);
+			
+		// 	var file2 = new Blob([response], {type:"image/jpg"});
+		// 	saveAs(file2,'watermark.jpeg')
+	// }).done(function (r) {
+ //  var reader = new FileReader()
+ //  reader.onload = function (e) {
+ //      document.getElementById("photo").src = e.target.result;
+ //   }
+ //  reader.readAsDataURL(new Blob([r]));
+ // var arr = new Uint8Array(this.response);
+				// var raw = String.fromCharCode.apply(null,arr);
+				// var b64=btoa(raw);
+				//         var dataURL="data:image/jpeg;base64,"+b64;
+				//         document.getElementById("photo").src = dataURL;
+	}
+ 	</script>
+</html>
+
